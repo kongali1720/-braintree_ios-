@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, BTThreeDSecureCardAddChallenge) {
 @property (nonatomic) BOOL exemptionRequested;
 
 /**
- :nodoc:
+ Optional. Indicates whether to use the data only flow. In this flow, frictionless 3DS is ensured for Mastercard cardholders as the card scheme provides a risk score for the issuer to determine whether to approve.
  */
 @property (nonatomic) BOOL dataOnlyRequested;
 
