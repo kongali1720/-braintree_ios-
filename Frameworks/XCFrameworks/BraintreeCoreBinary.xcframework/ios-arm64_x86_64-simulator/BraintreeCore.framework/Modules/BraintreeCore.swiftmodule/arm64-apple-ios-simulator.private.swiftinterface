@@ -1,0 +1,366 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)
+// swift-module-flags: -target arm64-apple-ios14.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BraintreeCore
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import PassKit
+import Security
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTPaymentMethodNonceParser : ObjectiveC.NSObject {
+  @objc(sharedParser) public static let shared: BraintreeCore.BTPaymentMethodNonceParser
+  @objc public var allTypes: [Swift.String] {
+    @objc get
+  }
+  @objc public func isTypeAvailable(_ type: Swift.String) -> Swift.Bool
+  @objc public func registerType(_ type: Swift.String?, withParsingBlock: @escaping (_ json: BraintreeCore.BTJSON?) -> BraintreeCore.BTPaymentMethodNonce?)
+  @objc public func parseJSON(_ json: BraintreeCore.BTJSON?, withParsingBlockForType type: Swift.String?) -> BraintreeCore.BTPaymentMethodNonce?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class BTBinData : ObjectiveC.NSObject {
+  @objc final public let prepaid: Swift.String
+  @objc final public let healthcare: Swift.String
+  @objc final public let debit: Swift.String
+  @objc final public let durbinRegulated: Swift.String
+  @objc final public let commercial: Swift.String
+  @objc final public let payroll: Swift.String
+  @objc final public let issuingBank: Swift.String
+  @objc final public let countryOfIssuance: Swift.String
+  @objc final public let productID: Swift.String
+  @objc(initWithJSON:) public init(json: BraintreeCore.BTJSON?)
+  @objc deinit
+}
+@objc @objcMembers public class BTClientToken : ObjectiveC.NSObject, Foundation.NSCoding, Foundation.NSCopying {
+  @objc final public let json: BraintreeCore.BTJSON
+  @objc final public let authorizationFingerprint: Swift.String
+  @objc final public let configURL: Foundation.URL
+  @objc final public let originalValue: Swift.String
+  @objc(initWithClientToken:error:) public init(clientToken: Swift.String) throws
+  @objc public func encode(with coder: Foundation.NSCoder)
+  @objc required convenience public init?(coder: Foundation.NSCoder)
+  @objc(copyWithZone:) public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public func isEqual(_ object: Any?) -> Swift.Bool
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTJSON : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc convenience public init(value: Any?)
+  @objc convenience public init(data: Foundation.Data)
+  @objc public var isString: Swift.Bool {
+    @objc get
+  }
+  @objc public var isBool: Swift.Bool {
+    @objc get
+  }
+  @objc public var isNumber: Swift.Bool {
+    @objc get
+  }
+  @objc public var isArray: Swift.Bool {
+    @objc get
+  }
+  @objc public var isObject: Swift.Bool {
+    @objc get
+  }
+  @objc public var isError: Swift.Bool {
+    @objc get
+  }
+  @objc public var isTrue: Swift.Bool {
+    @objc get
+  }
+  @objc public var isFalse: Swift.Bool {
+    @objc get
+  }
+  @objc public var isNull: Swift.Bool {
+    @objc get
+  }
+  @objc public subscript(index: Swift.Int) -> BraintreeCore.BTJSON {
+    @objc get
+  }
+  @objc public subscript(key: Swift.String) -> BraintreeCore.BTJSON {
+    @objc get
+  }
+  @objc public func asError() -> Foundation.NSError?
+  @objc public func asString() -> Swift.String?
+  public func asBool() -> Swift.Bool?
+  @objc public func asArray() -> [BraintreeCore.BTJSON]?
+  @objc public func asNumber() -> Foundation.NSNumber?
+  @objc public func asURL() -> Foundation.URL?
+  @objc public func asStringArray() -> [Swift.String]?
+  @objc public func asDictionary() -> Foundation.NSDictionary?
+  @objc public func asIntegerOrZero() -> Swift.Int
+  @objc public func asEnum(_ mapping: [Swift.String : Any], orDefault: Swift.Int) -> Swift.Int
+  @objc public func asAddress() -> BraintreeCore.BTPostalAddress?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTClientMetadata : ObjectiveC.NSObject, Foundation.NSMutableCopying {
+  @objc public var integration: BraintreeCore.BTClientMetadataIntegration
+  @objc public var source: BraintreeCore.BTClientMetadataSource
+  @objc public var sessionID: Swift.String
+  @objc public var integrationString: Swift.String {
+    @objc get
+  }
+  @objc public var sourceString: Swift.String {
+    @objc get
+  }
+  @objc public var parameters: [Swift.String : Any] {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc public func mutableCopy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc(copyWithZone:) public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @objcMembers public class BTAPIClient : ObjectiveC.NSObject {
+  public typealias RequestCompletion = (BraintreeCore.BTJSON?, Foundation.HTTPURLResponse?, Swift.Error?) -> Swift.Void
+  @objc public var tokenizationKey: Swift.String?
+  @objc public var clientToken: BraintreeCore.BTClientToken?
+  @objc public var metadata: BraintreeCore.BTClientMetadata {
+    get
+  }
+  @objc(initWithAuthorization:) convenience public init?(authorization: Swift.String)
+  @objc deinit
+  @objc public func fetchOrReturnRemoteConfiguration(_ completion: @escaping (BraintreeCore.BTConfiguration?, Swift.Error?) -> Swift.Void)
+  @objc public func fetchPaymentMethodNonces(_ completion: @escaping ([BraintreeCore.BTPaymentMethodNonce]?, Swift.Error?) -> Swift.Void)
+  @objc public func fetchPaymentMethodNonces(_ defaultFirst: Swift.Bool, completion: @escaping ([BraintreeCore.BTPaymentMethodNonce]?, Swift.Error?) -> Swift.Void)
+  @objc(GET:parameters:completion:) public func get(_ path: Swift.String, parameters: [Swift.String : Swift.String]? = nil, completion: @escaping BraintreeCore.BTAPIClient.RequestCompletion)
+  @objc(POST:parameters:completion:) public func post(_ path: Swift.String, parameters: [Swift.String : Any]? = nil, completion: @escaping BraintreeCore.BTAPIClient.RequestCompletion)
+  @objc(GET:parameters:httpType:completion:) public func get(_ path: Swift.String, parameters: [Swift.String : Swift.String]? = nil, httpType: BraintreeCore.BTAPIClientHTTPService, completion: @escaping BraintreeCore.BTAPIClient.RequestCompletion)
+  @objc(POST:parameters:httpType:completion:) public func post(_ path: Swift.String, parameters: [Swift.String : Any]? = nil, httpType: BraintreeCore.BTAPIClientHTTPService, completion: @escaping BraintreeCore.BTAPIClient.RequestCompletion)
+  @objc public func sendAnalyticsEvent(_ eventName: Swift.String)
+}
+@objc extension BraintreeCore.BTConfiguration {
+  @objc dynamic public var isGraphQLEnabled: Swift.Bool {
+    @objc get
+  }
+  @objc dynamic public var isVenmoEnabled: Swift.Bool {
+    @objc get
+  }
+  @objc dynamic public var venmoAccessToken: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var venmoMerchantID: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var venmoEnvironment: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var cardinalAuthenticationJWT: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var isLocalPaymentEnabled: Swift.Bool {
+    @objc get
+  }
+  @objc dynamic public var isApplePayEnabled: Swift.Bool {
+    @objc get
+  }
+  @objc dynamic public var canMakeApplePayPayments: Swift.Bool {
+    @objc get
+  }
+  @objc dynamic public var applePayCountryCode: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var applePayCurrencyCode: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var applePayMerchantIdentifier: Swift.String? {
+    @objc get
+  }
+  @objc dynamic public var applePaySupportedNetworks: [PassKit.PKPaymentNetwork]? {
+    @objc get
+  }
+}
+@objc @objcMembers open class BTPaymentMethodNonce : ObjectiveC.NSObject {
+  @objc public var nonce: Swift.String
+  @objc public var type: Swift.String
+  @objc public var isDefault: Swift.Bool
+  @objc(initWithNonce:) public init(nonce: Swift.String)
+  @objc(initWithNonce:type:) public init(nonce: Swift.String, type: Swift.String)
+  @objc(initWithNonce:type:isDefault:) public init(nonce: Swift.String, type: Swift.String, isDefault: Swift.Bool)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTMutableClientMetadata : BraintreeCore.BTClientMetadata {
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol BTAppContextSwitchClient {
+  @objc static func canHandleReturnURL(_ url: Foundation.URL) -> Swift.Bool
+  @objc static func handleReturnURL(_ url: Foundation.URL)
+}
+@objc public enum BTHTTPErrorCode : Swift.Int {
+  case unknown
+  case responseContentTypeNotAcceptable
+  case clientError
+  case serverError
+  case missingBaseURL
+  case rateLimitError
+  case dataNotFound
+  case httpResponseInvalid
+  case urlStringInvalid
+  case clientApiUrlInvalid
+  case invalidAuthorizationFingerprint
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum BTClientMetadataIntegration : Swift.Int {
+  case custom
+  case dropIn
+  case dropIn2
+  case unknown
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTCoreConstants : ObjectiveC.NSObject {
+  @objc public static var braintreeSDKVersion: Swift.String
+  @objc public static var apiVersion: Swift.String
+  @objc public static var graphQLVersion: Swift.String
+  @objc public static var networkConnectionLostCode: Swift.Int
+  @objc public static let callbackURLScheme: Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum BTCardNetwork : Swift.Int {
+  case unknown
+  case AMEX
+  case dinersClub
+  case discover
+  case masterCard
+  case visa
+  case JCB
+  case laser
+  case maestro
+  case unionPay
+  case hiper
+  case hipercard
+  case solo
+  case `switch`
+  case ukMaestro
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum BTLogLevel : Swift.Int {
+  case none
+  case critical
+  case error
+  case warning
+  case info
+  case debug
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTAppContextSwitcher : ObjectiveC.NSObject {
+  @objc public static let sharedInstance: BraintreeCore.BTAppContextSwitcher
+  @objc public var returnURLScheme: Swift.String
+  @objc(handleOpenURLContext:) public func handleOpenURL(context: UIKit.UIOpenURLContext) -> Swift.Bool
+  @objc(handleOpenURL:) public func handleOpen(_ url: Foundation.URL) -> Swift.Bool
+  @objc(registerAppContextSwitchClient:) public func register(_ client: BraintreeCore.BTAppContextSwitchClient.Type)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol BTViewControllerPresentingDelegate : ObjectiveC.NSObjectProtocol {
+  @objc(paymentClient:requestsPresentationOfViewController:) func paymentClient(_ client: Any, requestsPresentationOf viewController: UIKit.UIViewController)
+  @objc(paymentClient:requestsDismissalOfViewController:) func paymentClient(_ client: Any, requestsDismissalOf viewController: UIKit.UIViewController)
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTLogLevelDescription : ObjectiveC.NSObject {
+  @objc public static func string(for level: BraintreeCore.BTLogLevel) -> Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTHTTPError : ObjectiveC.NSObject {
+  @objc public static let domain: Swift.String
+  @objc public static let urlResponseKey: Swift.String
+  @objc public static let jsonResponseBodyKey: Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTPostalAddress : ObjectiveC.NSObject, Foundation.NSCopying {
+  @objc public var recipientName: Swift.String?
+  @objc public var streetAddress: Swift.String?
+  @objc public var extendedAddress: Swift.String?
+  @objc public var locality: Swift.String?
+  @objc public var countryCodeAlpha2: Swift.String?
+  @objc public var postalCode: Swift.String?
+  @objc public var region: Swift.String?
+  @objc(copyWithZone:) public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @objcMembers public class BTConfiguration : ObjectiveC.NSObject {
+  @objc final public let json: BraintreeCore.BTJSON?
+  @objc public var environment: Swift.String? {
+    @objc get
+  }
+  @objc(initWithJSON:) public init(json: BraintreeCore.BTJSON?)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTKeychain : ObjectiveC.NSObject {
+  @objc public static func setString(_ string: Swift.String, forKey key: Swift.String) -> Swift.Bool
+  @objc public static func stringForKey(_ key: Swift.String) -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum BTAPIClientHTTPService : Swift.Int {
+  case gateway
+  case braintreeAPI
+  case graphQLAPI
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class BTAPIPinnedCertificates : ObjectiveC.NSObject {
+  @objc public static func trustedCertificates() -> [Foundation.NSData]
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum BTClientMetadataSource : Swift.Int {
+  case unknown
+  case payPalApp
+  case payPalBrowser
+  case venmoApp
+  case form
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @objc public class BTURLUtils : ObjectiveC.NSObject {
+  @objc(queryStringWithDictionary:) public static func queryString(from dict: Foundation.NSDictionary) -> Swift.String
+  @objc(queryParametersForURL:) public static func queryParameters(for url: Foundation.URL) -> [Swift.String : Swift.String]
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension BraintreeCore.BTHTTPErrorCode : Swift.Equatable {}
+extension BraintreeCore.BTHTTPErrorCode : Swift.Hashable {}
+extension BraintreeCore.BTHTTPErrorCode : Swift.RawRepresentable {}
+extension BraintreeCore.BTClientMetadataIntegration : Swift.Equatable {}
+extension BraintreeCore.BTClientMetadataIntegration : Swift.Hashable {}
+extension BraintreeCore.BTClientMetadataIntegration : Swift.RawRepresentable {}
+extension BraintreeCore.BTCardNetwork : Swift.Equatable {}
+extension BraintreeCore.BTCardNetwork : Swift.Hashable {}
+extension BraintreeCore.BTCardNetwork : Swift.RawRepresentable {}
+extension BraintreeCore.BTLogLevel : Swift.Equatable {}
+extension BraintreeCore.BTLogLevel : Swift.Hashable {}
+extension BraintreeCore.BTLogLevel : Swift.RawRepresentable {}
+extension BraintreeCore.BTAPIClientHTTPService : Swift.Equatable {}
+extension BraintreeCore.BTAPIClientHTTPService : Swift.Hashable {}
+extension BraintreeCore.BTAPIClientHTTPService : Swift.RawRepresentable {}
+extension BraintreeCore.BTClientMetadataSource : Swift.Equatable {}
+extension BraintreeCore.BTClientMetadataSource : Swift.Hashable {}
+extension BraintreeCore.BTClientMetadataSource : Swift.RawRepresentable {}

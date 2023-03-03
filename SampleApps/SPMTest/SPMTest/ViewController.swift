@@ -12,5 +12,10 @@ import BraintreePayPalNativeCheckout
 import BraintreeSEPADirectDebit
 
 class ViewController: UIViewController {
+    
+//    func myFunc() {
+//        let btAPIClient = BTAPIClient(authorization: "fake-token")
+//        let cardNonce = BTCardNonce()
+//    }
 
 }

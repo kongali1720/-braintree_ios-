@@ -21,7 +21,7 @@ let package = Package(
         ),
         .library(
             name: "BraintreeCore",
-            targets: ["BraintreeCore"]
+            targets: ["BraintreeCore2"]
         ),
         .library(
             name: "BraintreeDataCollector",
@@ -57,38 +57,42 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "BraintreeAmericanExpress",
-            dependencies: ["BraintreeCore"]
+            dependencies: ["BraintreeCore2"]
         ),
         .target(
             name: "BraintreeApplePay",
-            dependencies: ["BraintreeCore"]
+            dependencies: ["BraintreeCore2"]
         ),
         .target(
             name: "BraintreeCard",
-            dependencies: ["BraintreeCore"],
+            dependencies: ["BraintreeCore2"],
             publicHeadersPath: "Public"
         ),
         .target(
-            name: "BraintreeCore",
-            exclude: ["Info.plist", "Braintree.h"]
+            name: "BraintreeCore2",
+            dependencies: ["BraintreeCoreBinary"]
+        ),
+        .binaryTarget(
+            name: "BraintreeCoreBinary",
+            path: "Frameworks/XCFrameworks/BraintreeCoreBinary.xcframework"
         ),
         .target(
             name: "BraintreeDataCollector",
-            dependencies: ["BraintreeCore", "PPRiskMagnes"]
+            dependencies: ["BraintreeCore2", "PPRiskMagnes"]
         ),
         .target(
             name: "BraintreePaymentFlow",
-            dependencies: ["BraintreeCore", "BraintreeDataCollector"],
+            dependencies: ["BraintreeCore2", "BraintreeDataCollector"],
             publicHeadersPath: "Public"
         ),
         .target(
             name: "BraintreePayPal",
-            dependencies: ["BraintreeCore", "BraintreeDataCollector"],
+            dependencies: ["BraintreeCore2", "BraintreeDataCollector"],
             publicHeadersPath: "Public"
         ),
         .target(
             name: "BraintreePayPalNativeCheckout",
-            dependencies: ["BraintreeCore", "BraintreePayPal", "PayPalCheckout"],
+            dependencies: ["BraintreeCore2", "BraintreePayPal", "PayPalCheckout"],
             path: "Sources/BraintreePayPalNativeCheckout"
         ),
         .binaryTarget(
@@ -98,7 +102,7 @@ let package = Package(
         ),
         .target(
             name: "BraintreeSEPADirectDebit",
-            dependencies: ["BraintreeCore"],
+            dependencies: ["BraintreeCore2"],
             path: "Sources/BraintreeSEPADirectDebit"
         ),
         .target(
@@ -113,7 +117,7 @@ let package = Package(
         ),
         .target(
             name: "BraintreeVenmo",
-            dependencies: ["BraintreeCore"],
+            dependencies: ["BraintreeCore2"],
             publicHeadersPath: "Public"
         ),
         .binaryTarget(

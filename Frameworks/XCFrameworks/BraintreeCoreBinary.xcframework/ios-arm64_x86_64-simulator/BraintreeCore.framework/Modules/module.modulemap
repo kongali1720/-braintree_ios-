@@ -1,0 +1,4 @@
+framework module BraintreeCore {
+  header "BraintreeCore-Swift.h"
+  requires objc
+}
